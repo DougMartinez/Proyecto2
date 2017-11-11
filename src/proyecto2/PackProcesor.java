@@ -20,17 +20,14 @@ public class PackProcesor {
         this.listaprod =  listaprod;
     }
     
-    public void AgregarI (int id, int tiempo, int cantidad){
+    public void AgregarInv (int id, int tiempo, int cantidad){
         new Thread(){
             
             @Override
             public void run(){
                 try{
                     listaprod.getValor(id - 1).setCantidad( listaprod.getValor(id - 1).getCantidad() + cantidad);
-                } catch(Exception e){
-//                    Esto no estaba antes  
-// esto tampoco
-                }
+                } catch(Exception e){}
             }
         };
     }
