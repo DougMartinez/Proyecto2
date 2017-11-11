@@ -28,7 +28,7 @@ public class PackProcesor {
                 try{
                     listaprod.getValor(id - 1).setCantidad( listaprod.getValor(id - 1).getCantidad() + cantidad);
                 } catch(Exception e){
-                    
+//                    Esto no estaba antes
                 }
             }
         };
