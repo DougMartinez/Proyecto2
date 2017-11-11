@@ -5,7 +5,7 @@
  */
 package proyecto2.Nodos;
 
-import proyecto2.Producto;
+import Objeto.Producto;
 
 /**
  *

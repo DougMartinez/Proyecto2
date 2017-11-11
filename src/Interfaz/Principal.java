@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto2;
+package Interfaz;
 
 import proyecto2.ListasEnlazadas.ListaEnlazadaServer;
 import proyecto2.ListasEnlazadas.ListaEnlazadaPersona;
@@ -20,6 +20,11 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import proyecto2.PackProcesor;
+import Objeto.Persona;
+import Objeto.Producto;
+import Objeto.Servidor;
+import proyecto2.Util;
 
 /**
  *
@@ -308,7 +313,8 @@ public class Principal extends javax.swing.JFrame {
                     break;
                     
                 case "inventario":
-                    //hilo inventario
+                    PackProcesor prp = new PackProcesor(productosLista);
+                    prp.AgregarInv(Integer.parseInt(linea2[10]),Integer.parseInt(linea2[8]),Integer.parseInt(linea2[14]));
                     break;
                     
                 case "inicio":
@@ -321,12 +327,13 @@ public class Principal extends javax.swing.JFrame {
                     break;
             }
         }
-        Simulador sim = new Simulador();
-        sim.setVisible(true);
+//        Simulador sim = new Simulador();
+//        sim.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

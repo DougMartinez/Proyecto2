@@ -6,7 +6,7 @@
 package proyecto2.ListasEnlazadas;
 
 import proyecto2.Nodos.NodoServer;
-import proyecto2.Servidor;
+import Objeto.Servidor;
 
 /**
  *

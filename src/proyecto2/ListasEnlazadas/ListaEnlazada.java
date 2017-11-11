@@ -6,7 +6,7 @@
 package proyecto2.ListasEnlazadas;
 
 import proyecto2.Nodos.Nodo;
-import proyecto2.Producto;
+import Objeto.Producto;
 
 /**
  *

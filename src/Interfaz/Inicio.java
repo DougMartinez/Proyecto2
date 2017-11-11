@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyecto2;
+package Interfaz;
 
 /**
  *
@@ -76,7 +76,6 @@ public class Inicio extends javax.swing.JFrame {
         // TODO add your handling code here:
         Principal principal = new Principal();
         principal.setVisible(true);
-        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -5,6 +5,8 @@
  */
 package proyecto2;
 
+import Objeto.Producto;
+
 /**
  *
  * @author Douglas
