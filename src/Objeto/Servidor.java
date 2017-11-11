@@ -5,6 +5,8 @@
  */
 package Objeto;
 
+import proyecto2.ListasEnlazadas.Cola;
+
 /**
  *
  * @author Douglas
@@ -18,6 +20,8 @@ public class Servidor {
     private int alto;
     private int ancho;
     private int llegada;
+    private boolean disponible;
+    private Cola colapersonas;
     
     public Servidor(){
         noServer = 0;
@@ -26,7 +30,9 @@ public class Servidor {
         y = 0;
         alto = 0;
         ancho = 0;
-        llegada = 0;        
+        llegada = 0;
+        disponible = false;
+        colapersonas = new Cola();
     }
 
     /**
@@ -125,6 +131,20 @@ public class Servidor {
      */
     public void setLlegada(int aLlegada) {
         llegada = aLlegada;
+    }
+
+    /**
+     * @return the colapersonas
+     */
+    public Cola getColapersonas() {
+        return colapersonas;
+    }
+
+    /**
+     * @param colapersonas the colapersonas to set
+     */
+    public void setColapersonas(Cola colapersonas) {
+        this.colapersonas = colapersonas;
     }
     
 }

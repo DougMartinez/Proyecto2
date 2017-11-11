@@ -56,14 +56,17 @@ public class PackProcesor {
                 if(tipo==3){
                     tipo = 2;
                 }
+                System.out.println("           " + listaprod.getValor(tipo).getNombre() + " tenia: " + listaprod.getValor(tipo).getCantidad());
                 while(listaprod.getValor(tipo).getCantidad()<cantidad){
                     
                 }
                 listaprod.getValor(tipo).setCantidad(listaprod.getValor(tipo).getCantidad() - cantidad);
+                System.out.println("          A " + listaprod.getValor(tipo).getNombre() + " se le quitaron " + cantidad + " y ahora quedan: " + listaprod.getValor(tipo).getCantidad());
             }
         };
+        cliente.suspend();
         while(respuestaserver != true){
-            cliente.start();
+            cliente.resume();
         }
     }
 }

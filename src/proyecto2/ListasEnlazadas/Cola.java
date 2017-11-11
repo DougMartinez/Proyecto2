@@ -26,50 +26,17 @@ public class Cola {
         NodoSimPersona nuevo = new NodoSimPersona(p);
         if(primero == null){
             primero = nuevo;
+            ultimo = primero;
         } else {
-            NodoSimPersona aux = primero;
-            while(aux.getSiguiente() != null){
-            aux = aux.getSiguiente();
-        }
-        aux.setSiguiente(nuevo);
-        nuevo.setAnterior(aux);
-        ultimo = aux;
-        }          
-    }
-    
-    public void eliminaValor(Persona pa){
-        if (primero != null){
-            NodoSimPersona aux = primero;
-            NodoSimPersona ant = null;
-            while (aux != null){
-                if (aux.getValor() == pa){
-                    if (ant == null){
-                        primero = primero.getSiguiente();
-                        aux.setSiguiente(null);
-                        aux = primero;
-                    } else {
-                        ant.setSiguiente(aux.getSiguiente());
-                        aux.setSiguiente(null);
-                        aux = ant.getSiguiente();
-                    }                                             
-                } else{
-                        ant = aux;
-                        aux = aux.getSiguiente();
-                }
-            }
+            ultimo.setSiguiente(nuevo);
+            nuevo.setAnterior(ultimo);
+            ultimo = nuevo;
         }
     }
     
-    public void buscar(Persona psa){
-        if (primero != null){
-            NodoSimPersona aux = primero;
-            int cont = 0;
-            while (aux != null){
-                if (aux.getValor()==psa){
-                    cont++;
-                    aux = aux.getSiguiente();
-                }                                 
-            }                     
-        } 
+    public Persona DeQueue(){
+        Persona cliente = primero.getValor();
+        primero = primero.getSiguiente();
+        return cliente;
     }
 }
