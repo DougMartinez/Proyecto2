@@ -5,6 +5,7 @@
  */
 package proyecto2;
 
+import Objeto.Servidor;
 import proyecto2.ListasEnlazadas.ListaEnlazada;
 import proyecto2.ListasEnlazadas.ListaEnlazadaInventario;
 import proyecto2.ListasEnlazadas.ListaEnlazadaPersona;
@@ -84,29 +85,40 @@ public class PackProcesor {
         }.start();
     }
     
-//    public void Personas(){
-//        Thread cliente = new Thread(){
-//            @Override
-//            public void run(){
-//                int cantidad = (int)(Math.random()*8)+1;
-//                if(cantidad==9){
-//                    cantidad = 8;
-//                }
-//                int tipo = (int)(Math.random()*3);
-//                if(tipo==3){
-//                    tipo = 2;
-//                }
-//                System.out.println("           " + listaprod.getValor(tipo).getNombre() + " tenia: " + listaprod.getValor(tipo).getCantidad());
-//                while(listaprod.getValor(tipo).getCantidad()<cantidad){
-//                    
-//                }
-//                listaprod.getValor(tipo).setCantidad(listaprod.getValor(tipo).getCantidad() - cantidad);
-//                System.out.println("          A " + listaprod.getValor(tipo).getNombre() + " se le quitaron " + cantidad + " y ahora quedan: " + listaprod.getValor(tipo).getCantidad());
-//            }
-//        };
-//        cliente.suspend();
-//        while(respuestaserver != true){
-//            cliente.resume();
-//        }
-//    }
+    public void Procesar(Servidor s){
+        Thread cliente = new Thread(){
+            @Override
+            public void run(){
+                while(s.getContadorus() > 0){
+                    int cantidad = (int)(Math.random()*8)+1;
+                    if(cantidad==9){
+                        cantidad = 8;
+                    }
+                    int tipo = (int)(Math.random()*3);
+                    if(tipo==3){
+                        tipo = 2;
+                    }
+                    System.out.println("           " + listaprod.buscar(tipo).getValor().getNombre() + " tenia: " + listaprod.buscar(tipo).getValor().getCantidad());
+                    while(listaprod.buscar(tipo).getValor().getCantidad() < cantidad){
+                        
+                    }
+                    listaprod.buscar(tipo).getValor().setCantidad(listaprod.buscar(tipo).getValor().getCantidad() - cantidad);
+                    System.out.println("          A " + listaprod.getValor(tipo).getNombre() + " se le quitaron " + cantidad + " y ahora quedan: " + listaprod.getValor(tipo).getCantidad());
+                    
+                    s.setContadorus(s.getContadorus() - 1);
+                    s.setDisponible(true);
+                    
+                    try {
+                    Thread.sleep(s.getLlegada() * 1000);
+                    } catch(Exception e){
+                        System.out.println("Sale en vaqueros");
+                    }
+                }
+            }
+        };
+        cliente.suspend();
+        while(respuestaserver != true){
+            cliente.resume();
+        }
+    }
 }

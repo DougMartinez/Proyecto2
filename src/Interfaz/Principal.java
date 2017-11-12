@@ -335,15 +335,22 @@ public class Principal extends javax.swing.JFrame {
                     break;
             }
         }
+        
+        //Inicio de la simulacion
         PackProcesor ppr = new PackProcesor(productosLista,inventarioLista,personaLista,servidorLista);
-//        NodoInventario aux = inventarioLista.getPrimero();
-//        while(true){
-//            ppr.AgregarInv(aux);
-//            if(aux == inventarioLista.getUltimo()){
-//                break;
-//            }
-//            aux = aux.getSiguiente();
-//        }
+        
+        //Ingresar productos a la lista del inventario
+        NodoInventario aux = inventarioLista.getPrimero();
+        while(true){
+            ppr.AgregarInv(aux);
+            if(aux == inventarioLista.getUltimo()){
+                break;
+            }
+            aux = aux.getSiguiente();
+        }
+        
+        //Inicio del proceso de simulacion de compra
+        //Se empieza a llenar la cola del servidor 1
         NodoPersona auxp = personaLista.getHead();
         while(true){
             ppr.generarPersonas1server(auxp);
@@ -352,7 +359,10 @@ public class Principal extends javax.swing.JFrame {
             }
             auxp = auxp.getSiguiente();
         }
-//      
+        
+        
+        
+//      Se muesta la ventana de la simulacion donde se observa el movimiento de las "personas"
 //        Simulador sim = new Simulador();
 //        sim.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed

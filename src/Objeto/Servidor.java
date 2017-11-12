@@ -29,7 +29,7 @@ public class Servidor {
         alto = 0;
         ancho = 0;
         llegada = 0;
-        disponible = false;
+        disponible = true;
         contadorus = 0;
     }
 

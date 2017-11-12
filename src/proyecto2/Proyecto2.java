@@ -15,10 +15,6 @@ import proyecto2.ListasEnlazadas.ListaEnlazada;
  */
 public class Proyecto2 {
     
-    public boolean servidor1 = false;
-    public boolean servidor2 = false;
-    public boolean servidor3 = false;
-    
     static ListaEnlazada lista = new ListaEnlazada();
     /**
      * @param args the command line arguments
