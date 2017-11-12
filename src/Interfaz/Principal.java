@@ -5,6 +5,7 @@
  */
 package Interfaz;
 
+import Objeto.Inventario;
 import proyecto2.ListasEnlazadas.ListaEnlazadaServer;
 import proyecto2.ListasEnlazadas.ListaEnlazadaPersona;
 import proyecto2.ListasEnlazadas.ListaEnlazada;
@@ -24,6 +25,7 @@ import proyecto2.PackProcesor;
 import Objeto.Persona;
 import Objeto.Producto;
 import Objeto.Servidor;
+import proyecto2.ListasEnlazadas.ListaEnlazadaInventario;
 import proyecto2.Util;
 
 /**
@@ -313,8 +315,11 @@ public class Principal extends javax.swing.JFrame {
                     break;
                     
                 case "inventario":
-                    PackProcesor prp = new PackProcesor(productosLista);
-                    prp.AgregarInv(Integer.parseInt(linea2[10]),Integer.parseInt(linea2[8]),Integer.parseInt(linea2[14]));
+                    Inventario inv = new Inventario();
+                    inv.setTiempo(Integer.parseInt(linea2[8]));
+                    inv.setProducto(Integer.parseInt(linea2[10]));
+                    inv.setCantidad(Integer.parseInt(linea2[14]));
+                    inventarioLista.insertarFinal(inv);
                     break;
                     
                 case "inicio":
@@ -327,6 +332,9 @@ public class Principal extends javax.swing.JFrame {
                     break;
             }
         }
+        PackProcesor ppr = new PackProcesor(productosLista,inventarioLista,personaLista,servidorLista);
+        ppr.AgregarInv();
+        
 //        Simulador sim = new Simulador();
 //        sim.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -412,4 +420,6 @@ public class Principal extends javax.swing.JFrame {
     public static ListaEnlazada productosLista = new ListaEnlazada();
     public static ListaEnlazadaServer servidorLista = new ListaEnlazadaServer();
     public static ListaEnlazadaPersona personaLista = new ListaEnlazadaPersona();
+    public static ListaEnlazadaInventario inventarioLista = new ListaEnlazadaInventario();
+            
 }

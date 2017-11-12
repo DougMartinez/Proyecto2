@@ -14,9 +14,9 @@ import Objeto.Persona;
  */
 public class ListaEnlazadaPersona {
     
-    NodoPersona head;
-    NodoPersona last;
-    int size;
+    private NodoPersona head;
+    private NodoPersona last;
+    private int size;
     
     public ListaEnlazadaPersona(){
         head = null;
@@ -25,28 +25,28 @@ public class ListaEnlazadaPersona {
     }
     
     public boolean Vacia(){
-        return(head==null)?true:false;
+        return(getHead()==null)?true:false;
     }
     
     public void add(Persona prod){
         if(Vacia() == true){
-            head = new NodoPersona(prod);
-            last = head;
+            setHead(new NodoPersona(prod));
+            setLast(getHead());
         } else {
-            NodoPersona temp = head;
+            NodoPersona temp = getHead();
             NodoPersona nuevo = new NodoPersona(prod);
             nuevo.setSiguiente(temp);
-            head = nuevo;
+            setHead(nuevo);
         }
-        size++;
+        setSize(getSize() + 1);
     }
     
     public int size(){
-        return size;
+        return getSize();
     }
     
     public Persona getValor(int index){
-        NodoPersona temporal = head;
+        NodoPersona temporal = getHead();
         int contador = 0;
         while(contador < index){
             temporal = temporal.getSiguiente();
@@ -55,45 +55,52 @@ public class ListaEnlazadaPersona {
         return temporal.getValor();
     }
     
-//    public void eliminar(int index){
-//        int contador = 0;
-//        Nodo temporal = head;
-//        if(index == 0){
-//            head = head.getSiguiente();
-//        } else {
-//            while(contador < index-1){
-//            temporal = temporal.getSiguiente();
-//            contador++;
-//            }
-//        temporal.siguiente(temporal.getSiguiente().getSiguiente());
-//        }
-//        size--;
-//    }
-    
     public void eliminar(int tipo, int cantidad){
         int cont = 0;
-        NodoPersona aux = head;
-        NodoPersona siguiente = head.getSiguiente();
-        NodoPersona anterior = head;
-
-//        while(true){
-//            if(aux.getValor().getNoServer()==tipo){
-//                aux.getValor().setCantidad(aux.getValor().getCantidad()-cantidad);
-//            }
-//        }
+        NodoPersona aux = getHead();
+        NodoPersona siguiente = getHead().getSiguiente();
+        NodoPersona anterior = getHead();
     }
-    
-//    public NodoPersona buscar(int id){
-//        NodoPersona n = head;
-//        while(true){
-//            if(n.getValor().getNoServer()==id){
-//                return n;
-//            }
-//            if(n==last){
-//                break;
-//            }
-//            n = n.getSiguiente();
-//        }
-//        return null;
-//    }
+
+    /**
+     * @return the head
+     */
+    public NodoPersona getHead() {
+        return head;
+    }
+
+    /**
+     * @param head the head to set
+     */
+    public void setHead(NodoPersona head) {
+        this.head = head;
+    }
+
+    /**
+     * @return the last
+     */
+    public NodoPersona getLast() {
+        return last;
+    }
+
+    /**
+     * @param last the last to set
+     */
+    public void setLast(NodoPersona last) {
+        this.last = last;
+    }
+
+    /**
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
+    }
 }

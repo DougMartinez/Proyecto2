@@ -23,7 +23,11 @@ public class Persona {
         tiempo = 0;
         radio = 0;
     }
-
+    
+    public Persona(int tLL, int time){
+        this.tasaLlegada = tLL;
+        this.tiempo = time;
+    }
     /**
      * @return the x
      */

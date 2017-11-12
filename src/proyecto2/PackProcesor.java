@@ -5,8 +5,15 @@
  */
 package proyecto2;
 
+import Objeto.Persona;
 import javax.swing.JOptionPane;
 import proyecto2.ListasEnlazadas.ListaEnlazada;
+import proyecto2.ListasEnlazadas.ListaEnlazadaInventario;
+import proyecto2.ListasEnlazadas.ListaEnlazadaPersona;
+import proyecto2.ListasEnlazadas.ListaEnlazadaServer;
+import proyecto2.Nodos.NodoInventario;
+import proyecto2.Nodos.NodoPersona;
+import proyecto2.Nodos.NodoServer;
 
 /**
  *
@@ -15,58 +22,85 @@ import proyecto2.ListasEnlazadas.ListaEnlazada;
 public class PackProcesor {
     
     ListaEnlazada listaprod;
-    
+    ListaEnlazadaInventario listainvent;
+    ListaEnlazadaPersona listapersona;
+    ListaEnlazadaServer listaserver;
+    NodoInventario auxInventario;
+    NodoPersona auxPersona;
     public boolean respuestaserver;
     
-    public PackProcesor(ListaEnlazada listaprod){
+    public PackProcesor(ListaEnlazada listaprod, ListaEnlazadaInventario listainvent, ListaEnlazadaPersona personalista, ListaEnlazadaServer serverlista){
         this.listaprod =  listaprod;
+        this.listainvent = listainvent;
+        this.listapersona = personalista;
+        this.listaserver = serverlista;
     }
     
-    public void AgregarInv (int id, int tiempo, int cantidad){
-        new Thread(){
-            @Override
-            public void run(){
-                while(true){
-                    try{
-                        listaprod.getValor(id - 1).setCantidad(listaprod.getValor(id - 1).getCantidad() + cantidad);
-                        System.out.println("Agrego del producto "+(id-1));
+    public void AgregarInv (){
+        auxInventario = listainvent.getPrimero();
+        while(true){
+            new Thread(){
+                @Override
+                public void run(){
+                    while(true){
                         try{
-                            System.out.println("TIEMPO ES "+tiempo);
-                            Thread.sleep(tiempo*1000);
-                        } catch (Exception e){
-                            System.out.println("No se pudo");
+                            listaprod.getValor(auxInventario.getValor().getProducto() - 1).setCantidad(listaprod.getValor(auxInventario.getValor().getProducto() - 1).getCantidad() + auxInventario.getValor().getCantidad());
+                            System.out.println("Agrego del producto "+(auxInventario.getValor().getProducto() - 1));
+                            try{
+                                System.out.println("TIEMPO ES " + auxInventario.getValor().getTiempo());
+                                Thread.sleep(auxInventario.getValor().getTiempo() * 1000);
+                            } catch (Exception e){
+                                System.out.println("No se pudo");
+                            }
+                        } catch(Exception e){
+                            System.out.println("Sale en vacas");
                         }
-                    } catch(Exception e){
-                        System.out.println("Sale en vacas");
                     }
                 }
+            }.start();
+            if(auxInventario == listainvent.getUltimo()){
+                
+                break;
             }
-        }.start();
+        auxInventario = auxInventario.getSiguiente();
+        }    
     }
     
-    public void Personas(){
-        Thread cliente = new Thread(){
-            @Override
-            public void run(){
-                int cantidad = (int)(Math.random()*8)+1;
-                if(cantidad==9){
-                    cantidad = 8;
-                }
-                int tipo = (int)(Math.random()*3);
-                if(tipo==3){
-                    tipo = 2;
-                }
-                System.out.println("           " + listaprod.getValor(tipo).getNombre() + " tenia: " + listaprod.getValor(tipo).getCantidad());
-                while(listaprod.getValor(tipo).getCantidad()<cantidad){
-                    
-                }
-                listaprod.getValor(tipo).setCantidad(listaprod.getValor(tipo).getCantidad() - cantidad);
-                System.out.println("          A " + listaprod.getValor(tipo).getNombre() + " se le quitaron " + cantidad + " y ahora quedan: " + listaprod.getValor(tipo).getCantidad());
+    public void generarPersonas(){
+        auxPersona = listapersona.getLast();
+        while(true){
+            Persona p = new Persona(auxPersona.getValor().getTasaLlegada(), auxPersona.getValor().getTiempo());
+            listaserver.getHead().getValor().getColapersonas().insertarFinal(p);
+            if(auxPersona==listapersona.getHead()){
+                break;
             }
-        };
-        cliente.suspend();
-        while(respuestaserver != true){
-            cliente.resume();
+            auxPersona = auxPersona.getSiguiente();
         }
     }
+    
+//    public void Personas(){
+//        Thread cliente = new Thread(){
+//            @Override
+//            public void run(){
+//                int cantidad = (int)(Math.random()*8)+1;
+//                if(cantidad==9){
+//                    cantidad = 8;
+//                }
+//                int tipo = (int)(Math.random()*3);
+//                if(tipo==3){
+//                    tipo = 2;
+//                }
+//                System.out.println("           " + listaprod.getValor(tipo).getNombre() + " tenia: " + listaprod.getValor(tipo).getCantidad());
+//                while(listaprod.getValor(tipo).getCantidad()<cantidad){
+//                    
+//                }
+//                listaprod.getValor(tipo).setCantidad(listaprod.getValor(tipo).getCantidad() - cantidad);
+//                System.out.println("          A " + listaprod.getValor(tipo).getNombre() + " se le quitaron " + cantidad + " y ahora quedan: " + listaprod.getValor(tipo).getCantidad());
+//            }
+//        };
+//        cliente.suspend();
+//        while(respuestaserver != true){
+//            cliente.resume();
+//        }
+//    }
 }

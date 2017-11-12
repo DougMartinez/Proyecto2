@@ -146,5 +146,22 @@ public class Servidor {
     public void setColapersonas(Cola colapersonas) {
         this.colapersonas = colapersonas;
     }
+
+    /**
+     * @return the disponible
+     */
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    /**
+     * @param disponible the disponible to set
+     */
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
     
+    public void Procesar(){
+        
+    }
 }

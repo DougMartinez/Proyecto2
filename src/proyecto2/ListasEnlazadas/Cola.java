@@ -34,7 +34,7 @@ public class Cola {
         }
     }
     
-    public Persona DeQueue(){
+    public Persona Sacar(){
         Persona cliente = primero.getValor();
         primero = primero.getSiguiente();
         return cliente;

@@ -14,9 +14,9 @@ import Objeto.Servidor;
  */
 public class ListaEnlazadaServer {
     
-    NodoServer head;
-    NodoServer last;
-    int size;
+    private NodoServer head;
+    private NodoServer last;
+    private int size;
     
     public ListaEnlazadaServer(){
         head = null;
@@ -25,75 +25,96 @@ public class ListaEnlazadaServer {
     }
     
     public boolean Vacia(){
-        return(head==null)?true:false;
+        return(getHead()==null)?true:false;
     }
     
     public void add(Servidor prod){
         if(Vacia() == true){
-            head = new NodoServer(prod);
-            last = head;
+            setHead(new NodoServer(prod));
+            setLast(getHead());
         } else {
-            NodoServer temp = head;
+            NodoServer temp = getHead();
             NodoServer nuevo = new NodoServer(prod);
             nuevo.setSiguiente(temp);
-            head = nuevo;
+            setHead(nuevo);
         }
-        size++;
+        setSize(getSize() + 1);
     }
     
     public int size(){
-        return size;
+        return getSize();
     }
     
-    public Servidor getValor(int index){
-        NodoServer temporal = head;
-        int contador = 0;
-        while(contador < index){
-            temporal = temporal.getSiguiente();
-            contador++;
-        }
-        return temporal.getValor();
-    }
-    
-//    public void eliminar(int index){
+//    public Servidor getValor(){
+//        NodoServer temporal = head;
 //        int contador = 0;
-//        Nodo temporal = head;
-//        if(index == 0){
-//            head = head.getSiguiente();
-//        } else {
-//            while(contador < index-1){
+//        while(contador < index){
 //            temporal = temporal.getSiguiente();
 //            contador++;
-//            }
-//        temporal.siguiente(temporal.getSiguiente().getSiguiente());
 //        }
-//        size--;
+//        return temporal.getValor();
 //    }
     
     public void eliminar(int tipo, int cantidad){
         int cont = 0;
-        NodoServer aux = head;
-        NodoServer siguiente = head.getSiguiente();
-        NodoServer anterior = head;
-
-//        while(true){
-//            if(aux.getValor().getNoServer()==tipo){
-//                aux.getValor().setCantidad(aux.getValor().getCantidad()-cantidad);
-//            }
-//        }
+        NodoServer aux = getHead();
+        NodoServer siguiente = getHead().getSiguiente();
+        NodoServer anterior = getHead();
     }
     
     public NodoServer buscar(int id){
-        NodoServer n = head;
+        NodoServer n = getHead();
         while(true){
             if(n.getValor().getNoServer()==id){
                 return n;
             }
-            if(n==last){
+            if(n==getLast()){
                 break;
             }
             n = n.getSiguiente();
         }
         return null;
+    }
+
+    /**
+     * @return the head
+     */
+    public NodoServer getHead() {
+        return head;
+    }
+
+    /**
+     * @param head the head to set
+     */
+    public void setHead(NodoServer head) {
+        this.head = head;
+    }
+
+    /**
+     * @return the last
+     */
+    public NodoServer getLast() {
+        return last;
+    }
+
+    /**
+     * @param last the last to set
+     */
+    public void setLast(NodoServer last) {
+        this.last = last;
+    }
+
+    /**
+     * @return the size
+     */
+    public int getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(int size) {
+        this.size = size;
     }
 }
