@@ -65,6 +65,8 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Proyecto 2");
@@ -149,17 +151,24 @@ public class Principal extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Archivo", jPanel1);
 
-        jPanel2.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTextArea1.setBackground(new java.awt.Color(204, 255, 204));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextArea1.setRows(5);
+        jTextArea1.setText("---------------------------------------------------RESULTADOS-----------------------------------------------------");
+        jScrollPane1.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 853, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 492, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Resultados", jPanel2);
@@ -281,6 +290,7 @@ public class Principal extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         iniciado = true;
+        inicio = System.currentTimeMillis();
         String[] linea1 = jTextArea2.getText().split("\n");
         String[] linea2;
         for(int i=1; i<linea1.length; i++){
@@ -341,6 +351,7 @@ public class Principal extends javax.swing.JFrame {
         //Inicio de la simulacion
         PackProcesor ppr = new PackProcesor(productosLista,inventarioLista,personaLista,servidorLista);
         
+        
         //Ingresar productos a la lista del inventario
         NodoInventario aux = inventarioLista.getPrimero();
         while(true){
@@ -350,6 +361,7 @@ public class Principal extends javax.swing.JFrame {
             }
             aux = aux.getSiguiente();
         }
+        
         
         //Inicio del proceso de simulacion de compra
         //Se empieza a llenar la cola del servidor 1
@@ -361,6 +373,7 @@ public class Principal extends javax.swing.JFrame {
             }
             auxp = auxp.getSiguiente();
         }
+        
         
         //Se inicia el proceso de compra
         NodoServer auxs = servidorLista.getHead();
@@ -402,6 +415,7 @@ public class Principal extends javax.swing.JFrame {
                 aux = aux.getSiguiente();
             }
         }
+        fin = System.currentTimeMillis();
         iniciado = false;
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -411,7 +425,32 @@ public class Principal extends javax.swing.JFrame {
         if(leido == true){
             if(yaejecutado == true){
                 if(iniciado == false){
-                    System.out.println("LOL");
+                    jTextArea1.append("\nCantidad de personas que entraron al sistema: " + ingresan + " personas.");
+                    jTextArea1.append("\nCantidad de personas que salieron del sistema: " + salen + " personas.");
+                    int suma = 0;
+                    NodoInventario aux = inventarioLista.getPrimero();
+                    while(true){
+                        suma = suma + productosLista.getValor(aux.getValor().getProducto()-1).getCantidad();
+                        if(aux == inventarioLista.getUltimo()){
+                            break;
+                        }
+                        aux = aux.getSiguiente();
+                    }
+                    jTextArea1.append("\nCantidad de Items en el inventario: " + suma + " productos.\n");
+                    jTextArea1.append("\nProductos del inventario:\n");
+                    NodoInventario aux2 = inventarioLista.getPrimero();
+                    while(true){    
+                        jTextArea1.append("\nProducto:\n    Nombre: " + productosLista.getValor(aux2.getValor().getProducto() - 1).getNombre() +
+                            "\n    ID: " + productosLista.getValor(aux2.getValor().getProducto()- 1).getId() +
+                            "\n    Descripcion: " + productosLista.getValor(aux2.getValor().getProducto()- 1).getDescripcion() +
+                            "\n    Linea: " + productosLista.getValor(aux2.getValor().getProducto()- 1).getLinea() + 
+                            "\n    Cantidad en inventario: " + productosLista.getValor(aux2.getValor().getProducto()- 1).getCantidad() + "\n");
+                        if(aux2 == inventarioLista.getUltimo()){
+                            break;
+                        }
+                        aux2 = aux2.getSiguiente();
+                    }
+                    jTextArea1.append("\n\nTiempo de simulacion: " + (fin - inicio)/1000 + " segundos");
                 } else {
                     JOptionPane.showMessageDialog(this, "No has detenido el simulacro, no se puede tabular resultados");
                 }
@@ -485,8 +524,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     // End of variables declaration//GEN-END:variables
     private javax.swing.JFileChooser fileCh;
@@ -501,4 +542,8 @@ public class Principal extends javax.swing.JFrame {
     boolean iniciado = false;
     boolean leido = false;
     boolean yaejecutado = false;
+    public static int ingresan = 0;
+    public static int salen = 0;
+    public long inicio;
+    public long fin;
 }

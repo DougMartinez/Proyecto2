@@ -10,7 +10,7 @@ package Objeto;
  * @author Douglas
  */
 public class Inventario {
-//    8, 10, 14
+    
     private int tiempo;
     private int producto;
     private int cantidad;

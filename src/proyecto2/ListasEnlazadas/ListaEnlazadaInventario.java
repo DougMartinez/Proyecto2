@@ -15,10 +15,12 @@ import proyecto2.Nodos.NodoInventario;
 public class ListaEnlazadaInventario {
     private NodoInventario primero;
     private NodoInventario ultimo;
+    private int size;
     
     public ListaEnlazadaInventario(){
         primero = null;
         ultimo = null;
+        size = 0;
     }
     
     public void insertarFinal(Inventario p){
@@ -31,6 +33,7 @@ public class ListaEnlazadaInventario {
             nuevo.setSiguiente(ultimo);
             ultimo = nuevo;
         }
+        size++;
     }
     
     public Inventario Sacar(){

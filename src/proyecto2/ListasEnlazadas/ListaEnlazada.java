@@ -54,21 +54,6 @@ public class ListaEnlazada {
         return temporal.getValor();
     }
     
-//    public void eliminar(int index){
-//        int contador = 0;
-//        Nodo temporal = head;
-//        if(index == 0){
-//            head = head.getSiguiente();
-//        } else {
-//            while(contador < index-1){
-//            temporal = temporal.getSiguiente();
-//            contador++;
-//            }
-//        temporal.siguiente(temporal.getSiguiente().getSiguiente());
-//        }
-//        size--;
-//    }
-    
     public void eliminar(int tipo, int cantidad){
         int cont = 0;
         Nodo aux = head;
