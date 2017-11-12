@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import javafx.scene.text.Font;
 import javax.swing.JFrame;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import proyecto2.Nodos.NodoServer;
 
 /**
  *
@@ -32,23 +33,30 @@ public class Simulador extends JFrame{
         super.paint(g);
         
         g.setColor(Color.BLUE.darker().darker());
-//        for(int y = 0; y < Principal.servidorLista.size(); y++){
-//            g.fillRect(Principal.servidorLista.getValor(y).getX(),
-//                    Principal.servidorLista.getValor(y).getY(),
-//                    Principal.servidorLista.getValor(y).getAncho(),
-//                    Principal.servidorLista.getValor(y).getAlto());
-//        }
-//        
-//        g.setColor(Color.GREEN);
-//        for(int u = 0; u < Principal.servidorLista.size(); u++){
-//            int [] vx1 = {Principal.servidorLista.getValor(u).getX() - 5,
-//                Principal.servidorLista.getValor(u).getX() - 5,
-//                Principal.servidorLista.getValor(u).getX() - 50};
-//            int [] vy1 = {Principal.servidorLista.getValor(u).getY() + Principal.servidorLista.getValor(u).getAncho() + 5,
-//                Principal.servidorLista.getValor(u).getY() + Principal.servidorLista.getValor(u).getAncho() + 50,
-//                Principal.servidorLista.getValor(u).getY() + Principal.servidorLista.getValor(u).getAncho() + 50};
-//            g.fillPolygon (vx1, vy1, 3);
-//        }
+        NodoServer cuad = Principal.servidorLista.getHead();
+        while(true){
+            g.fillRect(cuad.getValor().getX(),cuad.getValor().getY(),cuad.getValor().getAncho(),cuad.getValor().getAlto());
+            if(cuad == Principal.servidorLista.getLast()){
+                break;
+            }
+            cuad = cuad.getSiguiente();
+        }
+        
+        g.setColor(Color.GREEN);
+        NodoServer tri = Principal.servidorLista.getHead();
+        while(true){
+            int [] vx1 = {tri.getValor().getX() - 5,
+                tri.getValor().getX() - 5,
+                tri.getValor().getX() - 50};
+            int [] vy1 = {tri.getValor().getY() + tri.getValor().getAncho() + 5,
+                tri.getValor().getY() + tri.getValor().getAncho() + 50,
+                tri.getValor().getY() + tri.getValor().getAncho() + 50};
+            g.fillPolygon (vx1, vy1, 3);
+            if(tri == Principal.servidorLista.getLast()){
+                break;
+            }
+            tri = tri.getSiguiente();
+        }
         
         g.setColor(Color.YELLOW);
         for(int d = 0; d < Principal.personaLista.size(); d++){

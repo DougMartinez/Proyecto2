@@ -19,7 +19,7 @@ public class Util {
         super();
     }
     
-    public static Producto[] add(Producto[] mat, Producto prod){
+    public Producto[] add(Producto[] mat, Producto prod){
         
         Producto[] array = mat;
         if(mat.length == 0){
@@ -35,5 +35,12 @@ public class Util {
             productos[productos.length - 1] = prod;
         }
         return productos;
+    }
+    
+    public void Graph(int xo,int yo,int xf,int yf){
+        //RecorrerX
+        //for(){
+            
+        //}
     }
 }

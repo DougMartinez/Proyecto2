@@ -67,6 +67,8 @@ public class Principal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jButton8 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea3 = new javax.swing.JTextArea();
@@ -145,33 +147,55 @@ public class Principal extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 937, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Archivo", jPanel1);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(153, 255, 204));
 
         jTextArea1.setBackground(new java.awt.Color(204, 255, 204));
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextArea1.setRows(5);
-        jTextArea1.setText("---------------------------------------------------RESULTADOS-----------------------------------------------------");
+        jTextArea1.setCaretColor(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(jTextArea1);
+
+        jButton8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton8.setText("Guardar Resultado");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setBackground(new java.awt.Color(204, 255, 204));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        jLabel1.setText("--------------------------------------------- RESULTADOS -----------------------------------------");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 853, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 739, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jTabbedPane1.addTab("Resultados", jPanel2);
@@ -182,18 +206,18 @@ public class Principal extends javax.swing.JFrame {
         jTextArea3.setColumns(20);
         jTextArea3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jTextArea3.setRows(5);
-        jTextArea3.setText("----------------------------------------------------- HISTORIAL -----------------------------------------------------");
+        jTextArea3.setText("----------------------------------------------------------- HISTORIAL -----------------------------------------------------------");
         jScrollPane3.setViewportView(jTextArea3);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 853, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 937, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Historial", jPanel3);
@@ -208,19 +232,18 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jTabbedPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(32, 32, 32)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(32, 32, 32)
                         .addComponent(jButton3)
-                        .addGap(18, 18, 18)
+                        .addGap(32, 32, 32)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(32, 32, 32)
                         .addComponent(jButton6)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(32, 32, 32)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -316,68 +339,71 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         iniciado = true;
         inicio = System.currentTimeMillis();
-        String[] linea1 = jTextArea2.getText().split("\n");
-        String[] linea2;
-        for(int i=1; i<linea1.length; i++){
-            String aux = linea1[i];
-            linea2 = aux.split(";");
-            String op = linea2[0].toLowerCase();
-            switch (op){
-                case "servidores":
-                    Servidor ser = new Servidor();
-                    ser.setNoServer(Integer.parseInt(linea2[1]));
-                    ser.setSigServer(Integer.parseInt(linea2[2]));
-                    ser.setX(Integer.parseInt(linea2[3]));
-                    ser.setY(Integer.parseInt(linea2[4]));
-                    ser.setAlto(Integer.parseInt(linea2[5]));
-                    ser.setAncho(Integer.parseInt(linea2[6]));
-                    ser.setLlegada(Integer.parseInt(linea2[7]));
-                    servidorLista.add(ser);
-                    break;
-                    
-                case "personas":
-                    Persona persona = new Persona();
-                    persona.setX(Integer.parseInt(linea2[3]));
-                    persona.setY(Integer.parseInt(linea2[4]));
-                    persona.setTasaLlegada(Integer.parseInt(linea2[7]));
-                    persona.setTiempo(Integer.parseInt(linea2[8]));
-                    persona.setRadio(Integer.parseInt(linea2[9]));
-                    personaLista.add(persona);
-                    break;
-                    
-                case "productos":
-                    Producto prod = new Producto();
-                    prod.setId(Integer.parseInt(linea2[10]));
-                    prod.setNombre(linea2[11]);
-                    prod.setDescripcion(linea2[12]);
-                    prod.setLinea(linea2[13]);
-                    productosLista.add(prod);
-                    break;
-                    
-                case "inventario":
-                    Inventario inv = new Inventario();
-                    inv.setTiempo(Integer.parseInt(linea2[8]));
-                    inv.setProducto(Integer.parseInt(linea2[10]));
-                    inv.setCantidad(Integer.parseInt(linea2[14]));
-                    inventarioLista.insertarFinal(inv);
-                    break;
-                    
-                case "inicio":
-                    Nodo n = productosLista.buscar(Integer.parseInt(linea2[10]));
-                    if(n==null){
-                        JOptionPane.showMessageDialog(this, "No se encontro producto con ese ID");
-                    } else {
-                        productosLista.getValor(Integer.parseInt(linea2[10]) - 1).setCantidad(Integer.parseInt(linea2[14]));
-                    }
-                    break;
+        if(leido == true){
+            String[] linea1 = jTextArea2.getText().split("\n");
+            String[] linea2;
+            for(int i=1; i<linea1.length; i++){
+                String aux = linea1[i];
+                linea2 = aux.split(";");
+                String op = linea2[0].toLowerCase();
+                switch (op){
+                    case "servidores":
+                        Servidor ser = new Servidor();
+                        ser.setNoServer(Integer.parseInt(linea2[1]));
+                        ser.setSigServer(Integer.parseInt(linea2[2]));
+                        ser.setX(Integer.parseInt(linea2[3]));
+                        ser.setY(Integer.parseInt(linea2[4]));
+                        ser.setAlto(Integer.parseInt(linea2[5]));
+                        ser.setAncho(Integer.parseInt(linea2[6]));
+                        ser.setLlegada(Integer.parseInt(linea2[7]));
+                        servidorLista.add(ser);
+                        break;
+
+                    case "personas":
+                        Persona persona = new Persona();
+                        persona.setX(Integer.parseInt(linea2[3]));
+                        persona.setY(Integer.parseInt(linea2[4]));
+                        persona.setTasaLlegada(Integer.parseInt(linea2[7]));
+                        persona.setTiempo(Integer.parseInt(linea2[8]));
+                        persona.setRadio(Integer.parseInt(linea2[9]));
+                        personaLista.add(persona);
+                        break;
+
+                    case "productos":
+                        Producto prod = new Producto();
+                        prod.setId(Integer.parseInt(linea2[10]));
+                        prod.setNombre(linea2[11]);
+                        prod.setDescripcion(linea2[12]);
+                        prod.setLinea(linea2[13]);
+                        productosLista.add(prod);
+                        break;
+
+                    case "inventario":
+                        Inventario inv = new Inventario();
+                        inv.setTiempo(Integer.parseInt(linea2[8]));
+                        inv.setProducto(Integer.parseInt(linea2[10]));
+                        inv.setCantidad(Integer.parseInt(linea2[14]));
+                        inventarioLista.insertarFinal(inv);
+                        break;
+
+                    case "inicio":
+                        Nodo n = productosLista.buscar(Integer.parseInt(linea2[10]));
+                        if(n==null){
+                            JOptionPane.showMessageDialog(this, "No se encontro producto con ese ID");
+                        } else {
+                            productosLista.getValor(Integer.parseInt(linea2[10]) - 1).setCantidad(Integer.parseInt(linea2[14]));
+                        }
+                        break;
+                }
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "No ha abierto el archivo .csv");
         }
         yaejecutado = true;
-        //Inicio de la simulacion
+    //Inicio de la simulacion
         PackProcesor ppr = new PackProcesor(productosLista,inventarioLista,personaLista,servidorLista);
         
-        
-        //Ingresar productos a la lista del inventario
+    //Ingresar productos a la lista del inventario
         NodoInventario aux = inventarioLista.getPrimero();
         while(true){
             ppr.AgregarInv(aux);
@@ -387,9 +413,7 @@ public class Principal extends javax.swing.JFrame {
             aux = aux.getSiguiente();
         }
         
-        
-        //Inicio del proceso de simulacion de compra
-        //Se empieza a llenar la cola del servidor 1
+    //Inicio del proceso de simulacion de compra, se empieza a llenar la cola del servidor 1
         NodoPersona auxp = personaLista.getHead();
         while(true){
             ppr.generarPersonas1server(auxp);
@@ -399,13 +423,11 @@ public class Principal extends javax.swing.JFrame {
             auxp = auxp.getSiguiente();
         }
         
-        
-        //Se inicia el proceso de compra
+    //Se inicia el proceso de compra
         NodoServer auxs = servidorLista.getHead();
         while(true){
-//            System.out.println("Recorri agregarle el thread a servidor numero "+auxs.getValor().getNoServer());
             if(auxs.getSiguiente()!=null){
-//              System.out.println("EL siguiente de ese servidor es "+auxs.getSiguiente().getValor().getNoServer());
+                
             }
             ppr.Procesar(auxs);
 
@@ -415,11 +437,9 @@ public class Principal extends javax.swing.JFrame {
             auxs = auxs.getSiguiente();
         }
         
-        
-        
-//      Se muesta la ventana de la simulacion donde se observa el movimiento de las "personas"
-//        Simulador sim = new Simulador();
-//        sim.setVisible(true);
+    //Se muesta la ventana de la simulacion donde se observa el movimiento de las "personas"
+        Simulador sim = new Simulador();
+        sim.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     //Stop
@@ -446,7 +466,7 @@ public class Principal extends javax.swing.JFrame {
         if(leido == true){
             if(yaejecutado == true){
                 if(iniciado == false){
-                    jTextArea1.append("\nCantidad de personas que entraron al sistema: " + ingresan + " personas.");
+                    jTextArea1.append("Cantidad de personas que entraron al sistema: " + ingresan + " personas.");
                     jTextArea1.append("\nCantidad de personas que salieron del sistema: " + salen + " personas.");
                     Nodo aux3 = productosLista.getHead();
                     int suma2 = 0;
@@ -489,6 +509,29 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:      
         System.exit(0);
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    //Guardar Resultados
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        try {
+            String ruta="";
+            JFileChooser fc = new JFileChooser();
+            fc.showSaveDialog(this);
+            File archivo = fc.getSelectedFile();
+            if(archivo !=null){
+                PrintWriter  fw;
+                fw = new PrintWriter(archivo+".txt");
+                String[] linea = jTextArea1.getText().split("\n");
+                for(int i=0; i<linea.length; i++){
+                    fw.println(linea[i]);
+                }
+                fw.close();
+           }
+        } catch(IOException ex){
+          JOptionPane.showMessageDialog(null,
+               "Su archivo no se ha guardado","Advertencia",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
     
     private String abrirCSV(){
         String cadena="";
@@ -499,7 +542,7 @@ public class Principal extends javax.swing.JFrame {
         Path = cadena;
         return cadena;
     }
-
+    
     /**
      * @param args the command line arguments
      */
@@ -543,6 +586,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
