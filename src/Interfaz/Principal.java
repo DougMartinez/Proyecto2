@@ -27,6 +27,7 @@ import Objeto.Producto;
 import Objeto.Servidor;
 import proyecto2.ListasEnlazadas.ListaEnlazadaInventario;
 import proyecto2.Nodos.NodoInventario;
+import proyecto2.Nodos.NodoPersona;
 import proyecto2.Util;
 
 /**
@@ -334,17 +335,23 @@ public class Principal extends javax.swing.JFrame {
                     break;
             }
         }
-        PackProcesor ppr = new PackProcesor(productosLista,personaLista,servidorLista);
-        NodoInventario aux = inventarioLista.getPrimero();
+        PackProcesor ppr = new PackProcesor(productosLista,inventarioLista,personaLista,servidorLista);
+//        NodoInventario aux = inventarioLista.getPrimero();
+//        while(true){
+//            ppr.AgregarInv(aux);
+//            if(aux == inventarioLista.getUltimo()){
+//                break;
+//            }
+//            aux = aux.getSiguiente();
+//        }
+        NodoPersona auxp = personaLista.getHead();
         while(true){
-            ppr.AgregarInv(aux);
-            if(aux == inventarioLista.getUltimo()){
+            ppr.generarPersonas1server(auxp);
+            if(auxp == personaLista.getLast()){
                 break;
             }
-            aux = aux.getSiguiente();
+            auxp = auxp.getSiguiente();
         }
-//        ppr.AgregarInv();
-//        ppr.generarPersonas1server();
 //      
 //        Simulador sim = new Simulador();
 //        sim.setVisible(true);
