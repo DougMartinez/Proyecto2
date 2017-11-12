@@ -71,8 +71,7 @@ public class NodoServer {
 //                    }
 //                }
 //            }
-//        }.start();  
- 
+//        }.start();
     }
 
     public Servidor getValor(){

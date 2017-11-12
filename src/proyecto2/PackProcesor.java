@@ -5,15 +5,18 @@
  */
 package proyecto2;
 
+import Interfaz.Principal;
 import Objeto.Servidor;
 import proyecto2.ListasEnlazadas.ListaEnlazada;
 import proyecto2.ListasEnlazadas.ListaEnlazadaInventario;
 import proyecto2.ListasEnlazadas.ListaEnlazadaPersona;
 import proyecto2.ListasEnlazadas.ListaEnlazadaServer;
+import proyecto2.ListasEnlazadas.ListaEnlazadaHilo;
 import proyecto2.Nodos.Nodo;
 import proyecto2.Nodos.NodoInventario;
 import proyecto2.Nodos.NodoPersona;
 import proyecto2.Nodos.NodoServer;
+import proyecto2.Nodos.NodoHilo;
 
 /**
  *
@@ -25,59 +28,60 @@ public class PackProcesor {
     ListaEnlazadaInventario listainvent;
     ListaEnlazadaPersona listapersona;
     ListaEnlazadaServer listaserver;
-    NodoPersona auxPersona; 
+//    NodoPersona auxPersona; 
     public boolean respuestaserver;
     NodoServer n;
     
-    public PackProcesor(ListaEnlazada listaprod, ListaEnlazadaInventario listainvent, ListaEnlazadaPersona personalista,ListaEnlazadaServer serverlista){
+    public PackProcesor(ListaEnlazada listaprod, ListaEnlazadaInventario listainvent, ListaEnlazadaPersona personalista, ListaEnlazadaServer serverlista){
         this.listaprod =  listaprod;
         this.listapersona = personalista;
         this.listaserver = serverlista;
     }
     
     public void AgregarInv (NodoInventario auxInventario){
-            new Thread(){
-                @Override
-                public void run(){
-                    while(true){
-                        try{
-                            if(auxInventario.getValor().getProducto()==3){
-                                Nodo aux2 = listaprod.getHead();
-                                while(true){
-                               //     System.out.println("Producto "+aux2.getValor().getNombre() +" tiene "+aux2.getValor().getCantidad());
-                                    if(aux2==listaprod.getLast()){
-                                        break;
-                                    }
-                                    aux2 = aux2.getSiguiente();
-                                }
-                            }
-                            //System.out.println("El agregar inventario por producto con ID " + auxInventario.getValor().getProducto() + " agregara " +  auxInventario.getValor().getCantidad());
-                            int idProd = auxInventario.getValor().getProducto();
-                            int cant = auxInventario.getValor().getCantidad();
-                            int temp = auxInventario.getValor().getTiempo();
-                            listaprod.getValor(idProd - 1).setCantidad(listaprod.getValor(idProd - 1).getCantidad() + cant);
-                            try{
-                                Thread.sleep(auxInventario.getValor().getTiempo() * 1000);
-                            } catch (Exception e){
-                                System.out.println("No se pudo");
-                            }
-                        } catch(Exception e){
-                            System.out.println(e);
-                            System.out.println("Sale en vacas");
-                        }
-                    }
-                }
-            }.start();
-    }
-    
-    public void generarPersonas1server(NodoPersona auxPersona){
-        new Thread(){
+        Thread i = new Thread(){
             @Override
             public void run(){
                 while(true){
                     try{
+                        System.out.println("metiendo productos");
+                        if(auxInventario.getValor().getProducto()==3){
+                            Nodo aux2 = listaprod.getHead();
+                            while(true){
+                              if(aux2==listaprod.getLast()){
+                                    break;
+                                }
+                                aux2 = aux2.getSiguiente();
+                            }
+                        }
+                        int idProd = auxInventario.getValor().getProducto();
+                        int cant = auxInventario.getValor().getCantidad();
+                        int temp = auxInventario.getValor().getTiempo();
+                        listaprod.getValor(idProd - 1).setCantidad(listaprod.getValor(idProd - 1).getCantidad() + cant);
+                        try{
+                            Thread.sleep(auxInventario.getValor().getTiempo() * 1000);
+                        } catch (Exception e){
+                            System.out.println("No se pudo");
+                        }
+                    } catch(Exception e){
+                        System.out.println(e);
+                        System.out.println("Sale en vacas");
+                    }
+                }
+            }
+        };
+        i.start();
+        Principal.listahilos.add(i);
+    }
+    
+    public void generarPersonas1server(NodoPersona auxPersona){
+        Thread o = new Thread(){
+            @Override
+            public void run(){
+                while(true){
+                    try{
+                        System.out.println("metiendo personas");
                         listaserver.getHead().getValor().setContadorus(listaserver.getHead().getValor().getContadorus() + auxPersona.getValor().getTasaLlegada());
-//                        System.out.println("En cola servidor 1 hay " + listaserver.getHead().getValor().getContadorus());
                         try{
                             Thread.sleep(auxPersona.getValor().getTiempo() * 1000);
                         } catch (Exception e){
@@ -89,18 +93,21 @@ public class PackProcesor {
                     }
                 }
             }
-        }.start();
+        };
+        o.start();
+        Principal.listahilos.add(o);
     }
     
     public void Procesar(NodoServer ns){
         Thread t = new Thread(){
             @Override
             public void run(){
-                System.out.println("Llego el servidor "+ns.getValor().getNoServer());
                 while(true){
+                System.out.println("Llego el servidor "+ns.getValor().getNoServer());
                     NodoServer n = listaserver.buscar(ns.getValor().getNoServer());
                         
                     while(n.getValor().getContadorus() > 0 && n.getValor().isDisponible()){
+                    System.out.println("haciendo el proceso");
                         NodoServer aux2 = listaserver.getHead();
                         while(true){
                             System.out.println("Servidor "+aux2.getValor().getNoServer()+" tiene en contador "+aux2.getValor().getContadorus());
@@ -132,13 +139,10 @@ public class PackProcesor {
                         } catch(Exception e){
                             System.out.println("Sale en vaqueros");
                         }
-//                        System.out.println(" el siguiente del servidor "+n.getValor().getNoServer()+" es "+n.getSiguiente().getValor().getNoServer());
                         if(n.getSiguiente()!=null){
                             System.out.println("le paso a servidor "+n.getSiguiente().getValor().getNoServer()+" le sumo 1");
                             listaserver.buscar(n.getSiguiente().getValor().getNoServer()).getValor().setContadorus(listaserver.buscar(n.getSiguiente().getValor().getNoServer()).getValor().getContadorus()+1);
-//                            n.getSiguiente().getValor().setContadorus(n.getSiguiente().getValor().getContadorus()+1);   
-//                            sig.getValor().setContadorus(sig.getValor().getContadorus()+1);
-                            System.out.println("ahora el servidor "+n.getSiguiente().getValor().getNoServer()+" tiene en cola "+n.getSiguiente().getValor().getContadorus());
+                          System.out.println("ahora el servidor "+n.getSiguiente().getValor().getNoServer()+" tiene en cola "+n.getSiguiente().getValor().getContadorus());
                         }else{
                             System.out.println("CLIENTE TERMINADOOOOO! saliendo del ultimo servidor");
                         }
@@ -149,19 +153,6 @@ public class PackProcesor {
             }
         };
         t.start();
-//        if(n.getSiguiente()!=null){
-//            this.Procesar(listaserver.buscarNodo(n.getSiguiente()));            
-//        }
-//            NodoServer x;
-//        if(sig!=null){
-//            if(sig.getSiguiente()==null){
-//                x = null;
-//            }else{
-//            x= sig.getSiguiente();
-//
-//            }
-//            this.Procesar(sig, x);            
-//        }
-
+        Principal.listahilos.add(t);
     }
 }

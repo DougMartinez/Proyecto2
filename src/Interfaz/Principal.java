@@ -10,22 +10,21 @@ import proyecto2.ListasEnlazadas.ListaEnlazadaServer;
 import proyecto2.ListasEnlazadas.ListaEnlazadaPersona;
 import proyecto2.ListasEnlazadas.ListaEnlazada;
 import proyecto2.Nodos.Nodo;
-import java.awt.Color;
-import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import proyecto2.PackProcesor;
 import Objeto.Persona;
 import Objeto.Producto;
 import Objeto.Servidor;
+import proyecto2.ListasEnlazadas.ListaEnlazadaHilo;
 import proyecto2.ListasEnlazadas.ListaEnlazadaInventario;
+import proyecto2.Nodos.NodoHilo;
 import proyecto2.Nodos.NodoInventario;
 import proyecto2.Nodos.NodoPersona;
 import proyecto2.Nodos.NodoServer;
@@ -226,6 +225,7 @@ public class Principal extends javax.swing.JFrame {
         } catch (Exception e){
             JOptionPane.showMessageDialog(this, "Error al encontrar archivo");
         }
+        leido = true;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     //Guardar
@@ -280,6 +280,7 @@ public class Principal extends javax.swing.JFrame {
     //Play
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        iniciado = true;
         String[] linea1 = jTextArea2.getText().split("\n");
         String[] linea2;
         for(int i=1; i<linea1.length; i++){
@@ -336,7 +337,7 @@ public class Principal extends javax.swing.JFrame {
                     break;
             }
         }
-        
+        yaejecutado = true;
         //Inicio de la simulacion
         PackProcesor ppr = new PackProcesor(productosLista,inventarioLista,personaLista,servidorLista);
         
@@ -387,13 +388,40 @@ public class Principal extends javax.swing.JFrame {
 //        sim.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    //Stop
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        
+        NodoHilo aux = listahilos.getHead();
+        int respuesta = JOptionPane.showConfirmDialog(this,"Si continuas se detendra la simulacion y no se podra reanudar", "Detener", JOptionPane.YES_NO_OPTION);
+        if(respuesta==JOptionPane.YES_OPTION){
+            while(true){
+                aux.getValor().stop();
+                if(aux == listahilos.getLast()){
+                    break;
+                }
+                aux = aux.getSiguiente();
+            }
+        }
+        iniciado = false;
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    //Resultados
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        if(leido == true){
+            if(yaejecutado == true){
+                if(iniciado == false){
+                    System.out.println("LOL");
+                } else {
+                    JOptionPane.showMessageDialog(this, "No has detenido el simulacro, no se puede tabular resultados");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No has ejecutado el simulacro");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No has abierto un archivo .csv");
+        }
+
     }//GEN-LAST:event_jButton6ActionPerformed
 
     //Salir - Cerrar  
@@ -469,5 +497,8 @@ public class Principal extends javax.swing.JFrame {
     public static ListaEnlazadaServer servidorLista = new ListaEnlazadaServer();
     public static ListaEnlazadaPersona personaLista = new ListaEnlazadaPersona();
     public static ListaEnlazadaInventario inventarioLista = new ListaEnlazadaInventario();
-            
+    public static ListaEnlazadaHilo listahilos = new ListaEnlazadaHilo();
+    boolean iniciado = false;
+    boolean leido = false;
+    boolean yaejecutado = false;
 }

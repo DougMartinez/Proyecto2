@@ -22,4 +22,46 @@ public class NodoHilo {
         this.siguiente = null;
         this.anterior = null;
     }
+
+    /**
+     * @return the valor
+     */
+    public Thread getValor() {
+        return valor;
+    }
+
+    /**
+     * @param valor the valor to set
+     */
+    public void setValor(Thread valor) {
+        this.valor = valor;
+    }
+
+    /**
+     * @return the siguiente
+     */
+    public NodoHilo getSiguiente() {
+        return siguiente;
+    }
+
+    /**
+     * @param siguiente the siguiente to set
+     */
+    public void setSiguiente(NodoHilo siguiente) {
+        this.siguiente = siguiente;
+    }
+
+    /**
+     * @return the anterior
+     */
+    public NodoHilo getAnterior() {
+        return anterior;
+    }
+
+    /**
+     * @param anterior the anterior to set
+     */
+    public void setAnterior(NodoHilo anterior) {
+        this.anterior = anterior;
+    }
 }

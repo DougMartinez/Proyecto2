@@ -12,7 +12,7 @@ import Objeto.Inventario;
  * @author Douglas
  */
 public class NodoInventario {
-    
+
     private Inventario valor;
     private NodoInventario siguiente;
     private NodoInventario anterior;
@@ -25,6 +25,12 @@ public class NodoInventario {
     
     public Inventario getValor(){
         return valor;
+    }
+    /**
+     * @param valor the valor to set
+     */
+    public void setValor(Inventario valor) {
+        this.valor = valor;
     }
     
     public void setSiguiente(NodoInventario n){
