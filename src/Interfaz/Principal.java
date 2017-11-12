@@ -67,6 +67,9 @@ public class Principal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Proyecto 2");
@@ -173,6 +176,28 @@ public class Principal extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Resultados", jPanel2);
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTextArea3.setBackground(new java.awt.Color(204, 204, 255));
+        jTextArea3.setColumns(20);
+        jTextArea3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jTextArea3.setRows(5);
+        jTextArea3.setText("----------------------------------------------------- HISTORIAL -----------------------------------------------------");
+        jScrollPane3.setViewportView(jTextArea3);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 853, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        jTabbedPane1.addTab("Historial", jPanel3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -210,9 +235,9 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -224,7 +249,7 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         try{
 //            BufferedReader bf = new BufferedReader(new FileReader(abrirCSV()));
-//            BufferedReader bf = new BufferedReader(new FileReader("C:\\Users\\Douglas\\Desktop\\ArchivoEntrada.csv"));
+            Path = "C:\\Users\\Douglas\\Desktop\\Nuevo documento de texto.txt";
             BufferedReader bf = new BufferedReader(new FileReader("C:\\Users\\Douglas\\Desktop\\Nuevo documento de texto.txt"));
             String linea = bf.readLine();
             while(linea != null){
@@ -314,8 +339,8 @@ public class Principal extends javax.swing.JFrame {
                     Persona persona = new Persona();
                     persona.setX(Integer.parseInt(linea2[3]));
                     persona.setY(Integer.parseInt(linea2[4]));
-                    persona.setTasaLlegada(Integer.parseInt(linea2[7])); //Cuantas personas entran al sistema
-                    persona.setTiempo(Integer.parseInt(linea2[8])); // Cada cuanto entran las personas de TasaLLegada
+                    persona.setTasaLlegada(Integer.parseInt(linea2[7]));
+                    persona.setTiempo(Integer.parseInt(linea2[8]));
                     persona.setRadio(Integer.parseInt(linea2[9]));
                     personaLista.add(persona);
                     break;
@@ -377,15 +402,11 @@ public class Principal extends javax.swing.JFrame {
         
         //Se inicia el proceso de compra
         NodoServer auxs = servidorLista.getHead();
-//        if(productosLista.getHead()==null){
-            
-//        }
         while(true){
-            System.out.println("Recorri agregarle el thread a servidor numero "+auxs.getValor().getNoServer());
+//            System.out.println("Recorri agregarle el thread a servidor numero "+auxs.getValor().getNoServer());
             if(auxs.getSiguiente()!=null){
-                System.out.println("EL siguiente de ese servidor es "+auxs.getSiguiente().getValor().getNoServer());
+//              System.out.println("EL siguiente de ese servidor es "+auxs.getSiguiente().getValor().getNoServer());
             }
-//            ppr.Procesar(auxs,auxs.getSiguiente());
             ppr.Procesar(auxs);
 
             if(auxs == servidorLista.getLast()){
@@ -427,16 +448,16 @@ public class Principal extends javax.swing.JFrame {
                 if(iniciado == false){
                     jTextArea1.append("\nCantidad de personas que entraron al sistema: " + ingresan + " personas.");
                     jTextArea1.append("\nCantidad de personas que salieron del sistema: " + salen + " personas.");
-                    int suma = 0;
-                    NodoInventario aux = inventarioLista.getPrimero();
+                    Nodo aux3 = productosLista.getHead();
+                    int suma2 = 0;
                     while(true){
-                        suma = suma + productosLista.getValor(aux.getValor().getProducto()-1).getCantidad();
-                        if(aux == inventarioLista.getUltimo()){
+                        suma2+=aux3.getValor().getCantidad();
+                        if(aux3 == productosLista.getLast()){
                             break;
                         }
-                        aux = aux.getSiguiente();
+                        aux3 = aux3.getSiguiente();                        
                     }
-                    jTextArea1.append("\nCantidad de Items en el inventario: " + suma + " productos.\n");
+                    jTextArea1.append("\nCantidad de Items en el inventario: " + suma2 + " productos.\n");
                     jTextArea1.append("\nProductos del inventario:\n");
                     NodoInventario aux2 = inventarioLista.getPrimero();
                     while(true){    
@@ -524,11 +545,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
+    public static javax.swing.JTextArea jTextArea3;
     // End of variables declaration//GEN-END:variables
     private javax.swing.JFileChooser fileCh;
     public java.io.File fichero;

@@ -6,6 +6,8 @@
 package proyecto2;
 
 import Interfaz.Principal;
+import static Interfaz.Principal.jTextArea3;
+import javax.swing.JTextArea;
 import proyecto2.ListasEnlazadas.ListaEnlazada;
 import proyecto2.ListasEnlazadas.ListaEnlazadaInventario;
 import proyecto2.ListasEnlazadas.ListaEnlazadaPersona;
@@ -41,7 +43,7 @@ public class PackProcesor {
             public void run(){
                 while(true){
                     try {
-                        System.out.println("Ingresando productos a lista");
+                        jTextArea3.append("\nIngresando productos a lista\n");
                         if(auxInventario.getValor().getProducto()==3){
                             Nodo aux5 = listaprod.getHead();
                             while(true){
@@ -54,7 +56,7 @@ public class PackProcesor {
                         int idProd = auxInventario.getValor().getProducto();
                         int cant = auxInventario.getValor().getCantidad();
                         int temp = auxInventario.getValor().getTiempo();
-                        System.out.println("El prod actual que ingresa a la lista es: " + listaprod.getValor(idProd - 1).getNombre());
+                        jTextArea3.append("   El producto actual que ingresa a la lista es: " + listaprod.getValor(idProd - 1).getNombre() + "\n");
                         listaprod.getValor(idProd - 1).setCantidad(listaprod.getValor(idProd - 1).getCantidad() + cant);
                         try {
                             Thread.sleep(auxInventario.getValor().getTiempo() * 1000);
@@ -78,7 +80,7 @@ public class PackProcesor {
             public void run(){
                 while(true){
                     try {
-                        System.out.println("Ingresando personas al supermercado");
+                        jTextArea3.append("\nIngresando personas al supermercado\n");
                         listaserver.getHead().getValor().setContadorus(listaserver.getHead().getValor().getContadorus() + auxPersona.getValor().getTasaLlegada());
                         Principal.ingresan = Principal.ingresan + auxPersona.getValor().getTasaLlegada();
                         try{
@@ -102,21 +104,20 @@ public class PackProcesor {
             @Override
             public void run(){
                 while(true){
-                //System.out.println("Llego el servidor "+ns.getValor().getNoServer());
                     NodoServer n = listaserver.buscar(ns.getValor().getNoServer());
                         
                     while(n.getValor().getContadorus() > 0 && n.getValor().isDisponible()){
-                        System.out.println("Haciendo el proceso de compra");
+                        jTextArea3.append("Haciendo el proceso de compra\n");
                         NodoServer aux2 = listaserver.getHead();
                         while(true){
-                            System.out.println("Servidor "+aux2.getValor().getNoServer()+" tiene en cola "+aux2.getValor().getContadorus());
+                            jTextArea3.append("   Servidor "+aux2.getValor().getNoServer()+" tiene en cola "+aux2.getValor().getContadorus() + " personas\n");
                             if(aux2==listaserver.getLast()){
                                 break;
                             }
                             aux2 = aux2.getSiguiente();
                         }
                         
-                        System.out.println("AHORA MISMO ESTA OPERANDO EL SERVIDOR "+n.getValor().getNoServer()+" tiene en cola "+n.getValor().getContadorus());
+                        jTextArea3.append("   Actualmente se esta atendiendo en servidor " + n.getValor().getNoServer()+", tiene en cola "+n.getValor().getContadorus() + "\n");
                         n.getValor().setDisponible(false);
                         int cantidad = (int)(Math.random()*8)+1;
                         if(cantidad==9){
@@ -126,10 +127,10 @@ public class PackProcesor {
                         if(tipo==4){
                             tipo = 3;
                         }
-                        System.out.println("Antes de procesar " + listaprod.buscar(tipo).getValor().getNombre() + " tenia: " + listaprod.buscar(tipo).getValor().getCantidad());
+                        jTextArea3.append("   Antes de procesar " + listaprod.buscar(tipo).getValor().getNombre() + " tenia: " + listaprod.buscar(tipo).getValor().getCantidad() + "\n");
                         while(listaprod.buscar(tipo).getValor().getCantidad() < cantidad){}
                             listaprod.buscar(tipo).getValor().setCantidad(listaprod.buscar(tipo).getValor().getCantidad() - cantidad);
-                            System.out.println("Tras procesar " + listaprod.buscar(tipo).getValor().getNombre() + " ahora quedan: " + listaprod.buscar(tipo).getValor().getCantidad());
+                            jTextArea3.append("   Tras procesar " + listaprod.buscar(tipo).getValor().getNombre() + " ahora quedan: " + listaprod.buscar(tipo).getValor().getCantidad() + "\n");
                         
                         try {
                             Thread.sleep(n.getValor().getLlegada() * 1000);
@@ -138,12 +139,12 @@ public class PackProcesor {
                         }
                         
                         if(n.getSiguiente()!=null){
-                            System.out.println("Le paso a servidor "+n.getSiguiente().getValor().getNoServer()+ " 1 a cola");
+                            jTextArea3.append("   Se traslada a servidor " + n.getSiguiente().getValor().getNoServer()+ " una persona a cola\n");
                             listaserver.buscar(n.getSiguiente().getValor().getNoServer()).getValor().setContadorus(listaserver.buscar(n.getSiguiente().getValor().getNoServer()).getValor().getContadorus()+1);
-                          System.out.println("Ahora el servidor " + n.getSiguiente().getValor().getNoServer() + " tiene en cola " + n.getSiguiente().getValor().getContadorus());
+                            jTextArea3.append("   Ahora el servidor " + n.getSiguiente().getValor().getNoServer() + " tiene en cola " + n.getSiguiente().getValor().getContadorus() + " personas\n");
                         }else{
                             Principal.salen = Principal.salen + 1; 
-                            System.out.println("Servicio finalizado, cliente saliendo del ultimo servidor");
+                            jTextArea3.append("Servicio finalizado, un cliente saliendo del ultimo servidor\n");
                         }
                         n.getValor().setContadorus(n.getValor().getContadorus() - 1);
                         n.getValor().setDisponible(true);
