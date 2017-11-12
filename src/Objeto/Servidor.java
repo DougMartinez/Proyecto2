@@ -32,7 +32,7 @@ public class Servidor {
         disponible = true;
         contadorus = 0;
     }
-
+    
     /**
      * @return the noServer
      */

@@ -13,6 +13,7 @@ import proyecto2.ListasEnlazadas.ListaEnlazadaServer;
 import proyecto2.Nodos.Nodo;
 import proyecto2.Nodos.NodoInventario;
 import proyecto2.Nodos.NodoPersona;
+import proyecto2.Nodos.NodoServer;
 
 /**
  *
@@ -24,10 +25,11 @@ public class PackProcesor {
     ListaEnlazadaInventario listainvent;
     ListaEnlazadaPersona listapersona;
     ListaEnlazadaServer listaserver;
-    NodoPersona auxPersona;
+    NodoPersona auxPersona; 
     public boolean respuestaserver;
+    NodoServer n;
     
-    public PackProcesor(ListaEnlazada listaprod, ListaEnlazadaInventario listainvent, ListaEnlazadaPersona personalista, ListaEnlazadaServer serverlista){
+    public PackProcesor(ListaEnlazada listaprod, ListaEnlazadaInventario listainvent, ListaEnlazadaPersona personalista,ListaEnlazadaServer serverlista){
         this.listaprod =  listaprod;
         this.listapersona = personalista;
         this.listaserver = serverlista;
@@ -42,22 +44,25 @@ public class PackProcesor {
                             if(auxInventario.getValor().getProducto()==3){
                                 Nodo aux2 = listaprod.getHead();
                                 while(true){
+                               //     System.out.println("Producto "+aux2.getValor().getNombre() +" tiene "+aux2.getValor().getCantidad());
                                     if(aux2==listaprod.getLast()){
                                         break;
                                     }
                                     aux2 = aux2.getSiguiente();
-                                }                                
+                                }
                             }
+                            //System.out.println("El agregar inventario por producto con ID " + auxInventario.getValor().getProducto() + " agregara " +  auxInventario.getValor().getCantidad());
                             int idProd = auxInventario.getValor().getProducto();
                             int cant = auxInventario.getValor().getCantidad();
                             int temp = auxInventario.getValor().getTiempo();
-                            listaprod.getValor(idProd - 1).setCantidad(listaprod.getValor(idProd - 1).getCantidad() + cant);System.out.println("Agrego del producto "+(auxInventario.getValor().getProducto() - 1));
-                            try{System.out.println("TIEMPO ES " + auxInventario.getValor().getTiempo());
+                            listaprod.getValor(idProd - 1).setCantidad(listaprod.getValor(idProd - 1).getCantidad() + cant);
+                            try{
                                 Thread.sleep(auxInventario.getValor().getTiempo() * 1000);
                             } catch (Exception e){
                                 System.out.println("No se pudo");
                             }
-                        } catch(Exception e){System.out.println(e);
+                        } catch(Exception e){
+                            System.out.println(e);
                             System.out.println("Sale en vacas");
                         }
                     }
@@ -71,13 +76,15 @@ public class PackProcesor {
             public void run(){
                 while(true){
                     try{
-                        listaserver.getLast().getValor().setContadorus(listaserver.getLast().getValor().getContadorus() + auxPersona.getValor().getTasaLlegada());System.out.println("Agrego " + auxPersona.getValor().getTasaLlegada() + " al servidor " + listaserver.getLast().getValor().getNoServer());
+                        listaserver.getHead().getValor().setContadorus(listaserver.getHead().getValor().getContadorus() + auxPersona.getValor().getTasaLlegada());
+//                        System.out.println("En cola servidor 1 hay " + listaserver.getHead().getValor().getContadorus());
                         try{
                             Thread.sleep(auxPersona.getValor().getTiempo() * 1000);
                         } catch (Exception e){
                             System.out.println("No se pudo");
                         }
                     } catch(Exception e){
+                        System.out.println(e);
                         System.out.println("Sale en vacas");
                     }
                 }
@@ -85,40 +92,76 @@ public class PackProcesor {
         }.start();
     }
     
-    public void Procesar(Servidor s){
-        Thread cliente = new Thread(){
+    public void Procesar(NodoServer ns){
+        Thread t = new Thread(){
             @Override
             public void run(){
-                while(s.getContadorus() > 0){
-                    int cantidad = (int)(Math.random()*8)+1;
-                    if(cantidad==9){
-                        cantidad = 8;
-                    }
-                    int tipo = (int)(Math.random()*3);
-                    if(tipo==3){
-                        tipo = 2;
-                    }
-                    System.out.println("           " + listaprod.buscar(tipo).getValor().getNombre() + " tenia: " + listaprod.buscar(tipo).getValor().getCantidad());
-                    while(listaprod.buscar(tipo).getValor().getCantidad() < cantidad){
+                System.out.println("Llego el servidor "+ns.getValor().getNoServer());
+                while(true){
+                    NodoServer n = listaserver.buscar(ns.getValor().getNoServer());
                         
-                    }
-                    listaprod.buscar(tipo).getValor().setCantidad(listaprod.buscar(tipo).getValor().getCantidad() - cantidad);
-                    System.out.println("          A " + listaprod.getValor(tipo).getNombre() + " se le quitaron " + cantidad + " y ahora quedan: " + listaprod.getValor(tipo).getCantidad());
-                    
-                    s.setContadorus(s.getContadorus() - 1);
-                    s.setDisponible(true);
-                    
-                    try {
-                    Thread.sleep(s.getLlegada() * 1000);
-                    } catch(Exception e){
-                        System.out.println("Sale en vaqueros");
+                    while(n.getValor().getContadorus() > 0 && n.getValor().isDisponible()){
+                        NodoServer aux2 = listaserver.getHead();
+                        while(true){
+                            System.out.println("Servidor "+aux2.getValor().getNoServer()+" tiene en contador "+aux2.getValor().getContadorus());
+                            if(aux2==listaserver.getLast()){
+                                break;
+                            }
+                            aux2 = aux2.getSiguiente();
+                        }
+                    System.out.println("AHORA MISMO ESTA OPERANDO EL SERVIDOR "+n.getValor().getNoServer()+" tiene en contador "+n.getValor().getContadorus());
+                        n.getValor().setDisponible(false);
+                        int cantidad = (int)(Math.random()*8)+1;
+                        if(cantidad==9){
+                            cantidad = 8;
+                        }
+                        int tipo = (int)(Math.random()*3)+1;
+                        if(tipo==4){
+                            tipo = 3;
+                        }
+                        System.out.println("Antes de procesar "+listaprod.buscar(tipo).getValor().getNombre() + " tenia: " + listaprod.buscar(tipo).getValor().getCantidad());
+                        while(listaprod.buscar(tipo).getValor().getCantidad() < cantidad){
+
+                        }
+                        listaprod.buscar(tipo).getValor().setCantidad(listaprod.buscar(tipo).getValor().getCantidad() - cantidad);
+                        System.out.println("Tras procesar "+listaprod.buscar(tipo).getValor().getNombre() + " tenia " + ", se le quitaron " + cantidad + " y ahora quedan: " + listaprod.buscar(tipo).getValor().getCantidad());
+
+
+                        try {
+                        Thread.sleep(n.getValor().getLlegada() * 1000);
+                        } catch(Exception e){
+                            System.out.println("Sale en vaqueros");
+                        }
+//                        System.out.println(" el siguiente del servidor "+n.getValor().getNoServer()+" es "+n.getSiguiente().getValor().getNoServer());
+                        if(n.getSiguiente()!=null){
+                            System.out.println("le paso a servidor "+n.getSiguiente().getValor().getNoServer()+" le sumo 1");
+                            listaserver.buscar(n.getSiguiente().getValor().getNoServer()).getValor().setContadorus(listaserver.buscar(n.getSiguiente().getValor().getNoServer()).getValor().getContadorus()+1);
+//                            n.getSiguiente().getValor().setContadorus(n.getSiguiente().getValor().getContadorus()+1);   
+//                            sig.getValor().setContadorus(sig.getValor().getContadorus()+1);
+                            System.out.println("ahora el servidor "+n.getSiguiente().getValor().getNoServer()+" tiene en cola "+n.getSiguiente().getValor().getContadorus());
+                        }else{
+                            System.out.println("CLIENTE TERMINADOOOOO! saliendo del ultimo servidor");
+                        }
+                        n.getValor().setContadorus(n.getValor().getContadorus() - 1);
+                        n.getValor().setDisponible(true);
                     }
                 }
             }
         };
-        cliente.suspend();
-        while(respuestaserver != true){
-            cliente.resume();
-        }
+        t.start();
+//        if(n.getSiguiente()!=null){
+//            this.Procesar(listaserver.buscarNodo(n.getSiguiente()));            
+//        }
+//            NodoServer x;
+//        if(sig!=null){
+//            if(sig.getSiguiente()==null){
+//                x = null;
+//            }else{
+//            x= sig.getSiguiente();
+//
+//            }
+//            this.Procesar(sig, x);            
+//        }
+
     }
 }

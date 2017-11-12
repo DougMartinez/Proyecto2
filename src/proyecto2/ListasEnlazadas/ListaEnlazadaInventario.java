@@ -24,12 +24,12 @@ public class ListaEnlazadaInventario {
     public void insertarFinal(Inventario p){
         NodoInventario nuevo = new NodoInventario(p);
         if(getPrimero() == null){
-            setPrimero(nuevo);
-            setUltimo(getPrimero());
+            primero = nuevo;
+            ultimo = nuevo;
         } else {
-            getUltimo().setSiguiente(nuevo);
-            nuevo.setAnterior(getUltimo());
-            setUltimo(nuevo);
+            ultimo.setSiguiente(nuevo);
+            nuevo.setSiguiente(ultimo);
+            ultimo = nuevo;
         }
     }
     

@@ -30,13 +30,13 @@ public class ListaEnlazadaServer {
     
     public void add(Servidor prod){
         if(Vacia() == true){
-            setHead(new NodoServer(prod));
-            setLast(getHead());
+            head = new NodoServer(prod);
+            last = head;
         } else {
-            NodoServer temp = getHead();
             NodoServer nuevo = new NodoServer(prod);
-            nuevo.setSiguiente(temp);
-            setHead(nuevo);
+            nuevo.setAnterior(last);
+            last.setSiguiente(nuevo);
+            last = nuevo;
         }
         setSize(getSize() + 1);
     }
@@ -75,7 +75,23 @@ public class ListaEnlazadaServer {
         }
         return null;
     }
+    
+    public NodoServer buscarNodo(NodoServer n){
+        NodoServer aux = getHead();
+        while(true){
+            if(aux==n){
+                return aux;
+            }
+            if(aux==getLast()){
+                break;
+            }
+            aux = n.getSiguiente();
+        }
+        return null;        
+    }
 
+    
+    
     /**
      * @return the head
      */

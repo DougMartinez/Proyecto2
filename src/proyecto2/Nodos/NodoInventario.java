@@ -20,6 +20,7 @@ public class NodoInventario {
     public NodoInventario (Inventario valor){
          this.valor = valor;
          this.siguiente = null;
+         this.anterior = null;
     }
     
     public Inventario getValor(){

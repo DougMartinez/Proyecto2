@@ -28,6 +28,7 @@ import Objeto.Servidor;
 import proyecto2.ListasEnlazadas.ListaEnlazadaInventario;
 import proyecto2.Nodos.NodoInventario;
 import proyecto2.Nodos.NodoPersona;
+import proyecto2.Nodos.NodoServer;
 import proyecto2.Util;
 
 /**
@@ -358,6 +359,25 @@ public class Principal extends javax.swing.JFrame {
                 break;
             }
             auxp = auxp.getSiguiente();
+        }
+        
+        //Se inicia el proceso de compra
+        NodoServer auxs = servidorLista.getHead();
+//        if(productosLista.getHead()==null){
+            
+//        }
+        while(true){
+            System.out.println("Recorri agregarle el thread a servidor numero "+auxs.getValor().getNoServer());
+            if(auxs.getSiguiente()!=null){
+                System.out.println("EL siguiente de ese servidor es "+auxs.getSiguiente().getValor().getNoServer());
+            }
+//            ppr.Procesar(auxs,auxs.getSiguiente());
+            ppr.Procesar(auxs);
+
+            if(auxs == servidorLista.getLast()){
+                break;
+            }
+            auxs = auxs.getSiguiente();
         }
         
         

@@ -30,13 +30,13 @@ public class ListaEnlazadaPersona {
     
     public void add(Persona prod){
         if(Vacia() == true){
-            setHead(new NodoPersona(prod));
-            setLast(getHead());
+            head = new NodoPersona(prod);
+            last = head;
         } else {
-            NodoPersona temp = getHead();
-            NodoPersona nuevo = new NodoPersona(prod);
-            nuevo.setSiguiente(temp);
-            setHead(nuevo);
+            NodoPersona p = new NodoPersona(prod);
+            last.setSiguiente(p);
+            p.setAnterior(last);
+            last = p;
         }
         setSize(getSize() + 1);
     }

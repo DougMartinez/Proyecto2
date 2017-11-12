@@ -20,6 +20,7 @@ public class Nodo {
     public Nodo(Producto valor){
          this.valor = valor;
          this.siguiente = null;
+         this.anterior = null;
     }
     
     public Producto getValor(){
