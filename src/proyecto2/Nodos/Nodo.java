@@ -15,6 +15,7 @@ public class Nodo {
     
     private Producto valor;
     private Nodo siguiente;
+    private Nodo anterior;    
     
     public Nodo(Producto valor){
          this.valor = valor;
@@ -31,5 +32,19 @@ public class Nodo {
     
     public Nodo getSiguiente(){
         return siguiente;
+    }
+
+    /**
+     * @return the anterior
+     */
+    public Nodo getAnterior() {
+        return anterior;
+    }
+
+    /**
+     * @param anterior the anterior to set
+     */
+    public void setAnterior(Nodo anterior) {
+        this.anterior = anterior;
     }
 }

@@ -13,9 +13,9 @@ import Objeto.Producto;
  * @author Douglas
  */
 public class ListaEnlazada {
-    Nodo head;
-    Nodo last;
-    int size;
+    private Nodo head;
+    private Nodo last;
+    private int size;
     
     public ListaEnlazada(){
         head = null;
@@ -32,10 +32,10 @@ public class ListaEnlazada {
             head = new Nodo(prod);
             last = head;
         } else {
-            Nodo temp = head;
             Nodo nuevo = new Nodo(prod);
-            nuevo.setSiguiente(temp);
-            head = nuevo;
+            last.setSiguiente(nuevo);
+            nuevo.setSiguiente(last);
+            last = nuevo;
         }
         size++;
     }
@@ -95,4 +95,30 @@ public class ListaEnlazada {
         }
         return null;
     }
+
+    public Nodo getHead() {
+        return head;
+    }
+
+    public void setHead(Nodo head) {
+        this.head = head;
+    }
+
+    public Nodo getLast() {
+        return last;
+    }
+
+    public void setLast(Nodo last) {
+        this.last = last;
+    }
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+    
+    
 }

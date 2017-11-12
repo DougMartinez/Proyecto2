@@ -6,6 +6,7 @@
 package proyecto2;
 
 import Interfaz.Inicio;
+import Interfaz.Principal;
 import proyecto2.ListasEnlazadas.ListaEnlazada;
 
 /**
@@ -25,21 +26,11 @@ public class Proyecto2 {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        Inicio inicio = new Inicio();
-        inicio.setVisible(true);
-//        Principal prin = new Principal();
-//        prin.setVisible(true);
+//        Inicio inicio = new Inicio();
+//        inicio.setVisible(true);
+        Principal prin = new Principal();
+        prin.setVisible(true);
         
         
     }
-    
-//    public static void imprimir(){
-//        int contador = 0;
-//        Nodo temporal = lista.head;
-//        while(contador < lista.size()){
-//            System.out.println(lista.getValor(contador));
-//            temporal = temporal.getSiguiente();
-//            contador++;
-//        }
-//    }
 }
