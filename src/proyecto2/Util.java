@@ -6,6 +6,8 @@
 package proyecto2;
 
 import Objeto.Producto;
+import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  *
@@ -37,7 +39,9 @@ public class Util {
         return productos;
     }
     
-    public void Graph(int xo,int yo,int xf,int yf){
+    public void Graph(Graphics g){
+        g.setColor(Color.YELLOW);
+        g.fillOval(0, 0, 0, 0);
         //RecorrerX
         //for(){
             

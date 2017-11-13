@@ -5,8 +5,6 @@
  */
 package proyecto2.Nodos;
 
-import Objeto.Inventario;
-
 /**
  *
  * @author Douglas
@@ -17,8 +15,8 @@ public class NodoHilo {
     private NodoHilo siguiente;
     private NodoHilo anterior;
     
-    public NodoHilo(Thread th){
-        this.valor = th;
+    public NodoHilo(Thread t){
+        this.valor = t;
         this.siguiente = null;
         this.anterior = null;
     }
@@ -64,4 +62,5 @@ public class NodoHilo {
     public void setAnterior(NodoHilo anterior) {
         this.anterior = anterior;
     }
+    
 }

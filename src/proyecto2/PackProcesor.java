@@ -7,7 +7,6 @@ package proyecto2;
 
 import Interfaz.Principal;
 import static Interfaz.Principal.jTextArea3;
-import javax.swing.JTextArea;
 import proyecto2.ListasEnlazadas.ListaEnlazada;
 import proyecto2.ListasEnlazadas.ListaEnlazadaInventario;
 import proyecto2.ListasEnlazadas.ListaEnlazadaPersona;

@@ -271,9 +271,7 @@ public class Principal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         try{
-//            BufferedReader bf = new BufferedReader(new FileReader(abrirCSV()));
-            Path = "C:\\Users\\Douglas\\Desktop\\Nuevo documento de texto.txt";
-            BufferedReader bf = new BufferedReader(new FileReader("C:\\Users\\Douglas\\Desktop\\Nuevo documento de texto.txt"));
+            BufferedReader bf = new BufferedReader(new FileReader(abrirCSV()));
             String linea = bf.readLine();
             while(linea != null){
             jTextArea2.append(linea + "\n");
@@ -321,10 +319,10 @@ public class Principal extends javax.swing.JFrame {
             fc.showSaveDialog(this);
             File archivo = fc.getSelectedFile();
             if(archivo !=null){
-                FileWriter  fw = new FileWriter(archivo+".csv");
+                PrintWriter  fw = new PrintWriter(archivo+".csv");
                 String[] linea = jTextArea2.getText().split("\n");
                 for(int i=0; i<linea.length; i++){
-                    fw.write(linea[i] + "\n");
+                    fw.println(linea[i]);
                 }
                 fw.close();
            }

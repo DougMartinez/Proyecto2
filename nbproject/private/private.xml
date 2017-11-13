@@ -3,13 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Douglas/Desktop/Java/Proyecto2/src/proyecto2/Nodos/NodoHilo.java</file>
-            <file>file:/C:/Users/Douglas/Desktop/Java/Proyecto2/src/Objeto/Servidor.java</file>
+            <file>file:/C:/Users/Douglas/Desktop/Java/Proyecto2/src/proyecto2/ListasEnlazadas/ListaEnlazadaInventario.java</file>
+            <file>file:/C:/Users/Douglas/Desktop/Java/Proyecto2/src/proyecto2/ListasEnlazadas/ListaEnlazadaPersona.java</file>
             <file>file:/C:/Users/Douglas/Desktop/Java/Proyecto2/src/Interfaz/Principal.java</file>
             <file>file:/C:/Users/Douglas/Desktop/Java/Proyecto2/src/proyecto2/ListasEnlazadas/ListaEnlazadaServer.java</file>
             <file>file:/C:/Users/Douglas/Desktop/Java/Proyecto2/src/proyecto2/PackProcesor.java</file>
-            <file>file:/C:/Users/Douglas/Desktop/Java/Proyecto2/src/proyecto2/Nodos/NodoServer.java</file>
             <file>file:/C:/Users/Douglas/Desktop/Java/Proyecto2/src/proyecto2/ListasEnlazadas/ListaEnlazadaHilo.java</file>
+            <file>file:/C:/Users/Douglas/Desktop/Java/Proyecto2/src/proyecto2/ListasEnlazadas/ListaEnlazada.java</file>
+            <file>file:/C:/Users/Douglas/Desktop/Java/Proyecto2/src/proyecto2/ListasEnlazadas/Cola.java</file>
+            <file>file:/C:/Users/Douglas/Desktop/Java/Proyecto2/src/proyecto2/Nodos/Nodo.java</file>
         </group>
     </open-files>
 </project-private>

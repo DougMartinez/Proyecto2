@@ -18,7 +18,7 @@ import proyecto2.Nodos.NodoServer;
  * @author Douglas
  */
 public class Simulador extends JFrame{
-    
+    int contador = Principal.personaLista.getHead().getValor().getX();
     Font fuente = new Font(20);
     
     public Simulador(){
@@ -58,12 +58,85 @@ public class Simulador extends JFrame{
             tri = tri.getSiguiente();
         }
         
-        g.setColor(Color.YELLOW);
-        for(int d = 0; d < Principal.personaLista.size(); d++){
-            g.fillOval(Principal.personaLista.getValor(d).getX(),
-                    Principal.personaLista.getValor(d).getY(),
-                    Principal.personaLista.getValor(d).getRadio()*4,
-                    Principal.personaLista.getValor(d).getRadio()*4);
-        }
+        
+//        g.setColor(Color.YELLOW);
+//        g.fillOval(Principal.personaLista.getValor(0).getX(),
+//                    Principal.personaLista.getValor(0).getY(),
+//                    Principal.personaLista.getValor(0).getRadio()*4,
+//                    Principal.personaLista.getValor(0).getRadio()*4);
+        Simulador that = this;
+//        Thread t = new Thread(){
+//            int x = Principal.personaLista.getValor(0).getX(); 
+//            @Override
+//            public void run(){
+//                System.out.println("MANDO A LLAMAR ESTE METODO");
+//            while(x < Principal.servidorLista.getLast().getValor().getX() + Principal.servidorLista.getLast().getValor().getAncho() + 15){
+//            x=x+50;
+//                System.out.println("X "+x);
+//                    g.setColor(Color.RED);
+//                
+//                    g.fillOval(x,
+//                    Principal.personaLista.getValor(0).getY(),
+//                    (Principal.personaLista.getValor(0).getRadio()*4 + x),
+//                    (Principal.personaLista.getValor(0).getRadio()*4) + x); 
+////                    repaint(g);
+//                    long start = System.currentTimeMillis();
+//                    long last = start + 100;
+//                    while(System.currentTimeMillis() < last){
+//                        
+//                    }
+//                    
+//                that.repaint();
+//                that.revalidate();
+//                    
+//                    g.clearRect(0, 0, 1990, 1020);
+//                    that.removeAll();
+//            try {
+////                Thread.sleep(100);
+//            } catch (Exception e){
+//                System.out.println(e);
+//            }
+//        } 
+//                System.out.println("TERMINE PVTOS");
+//            }
+//        };
+////        if(this.contador==0){
+//            t.start();
+//            contador++;
+//        };
+        this.moverCirculo(g);
+    }
+    public void moverCirculo(Graphics g){
+        //System.out.println("Si estoy llegando");
+//        if(contador==0){
+//            for(int i=0;i<150;i+=50){
+//                g.setColor(Color.RED);
+//                g.fillOval(i,
+//                Principal.personaLista.getValor(0).getY(),
+//                (Principal.personaLista.getValor(0).getRadio()*4),
+//                (Principal.personaLista.getValor(0).getRadio()*4));
+//
+//            }            
+//        }
+        contador+=50;
+                    
+//                    this.repaint();
+                    g.setColor(Color.YELLOW);
+                    g.fillOval(contador-10,
+                    Principal.personaLista.getValor(0).getY(),
+                    (Principal.personaLista.getValor(0).getRadio()*4),
+                    (Principal.personaLista.getValor(0).getRadio()*4));
+                    
+                    this.repaint();
+                    long start = System.currentTimeMillis();
+                    long last = start + 3000;
+                    while(System.currentTimeMillis() < last){
+                        
+                    }
+
+//                    this.revalidate();
+//                            pack();
+//                            setBounds(0,0,1200,1000);
+//                    this.repaint(g);
     }
 }
